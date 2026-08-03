@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destination</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="config.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f1f3f6;
+    }
+    .navbar {
+      background-color: #0c1f36;
+      color: white;
+      height: 60px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+    .sidebar ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease-in-out;
+    }
+    .sidebar ul li a:hover {
+      color: #1abc9c;
+      padding-left: 5px;
+    }
+    main {
+      padding: 90px 30px 60px 30px;
+    }
+    .section-title {
+      margin: 40px 0 20px;
+      color: #0c1f36;
+      border-left: 5px solid #007bff;
+      padding-left: 15px;
+      font-weight: 700;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .card {
+      width: 260px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transition: all 0.3s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .info {
+      padding: 15px;
+    }
+    footer {
+      background-color: #0c1f36;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .search-boxes {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .search-boxes input {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="btn btn-outline-light me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+    <a class="navbar-brand me-auto" href="#">🌍 Destination Explorer</a>
+    <ul class="navbar-nav flex-row gap-3">
+      <li class="nav-item"><a class="nav-link text-light" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link text-light" href="About.html">About</a></li>
+      <li class="nav-item"><a class="nav-link text-light" href="Services.html">Services</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-start text-bg-dark" id="sidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Navigation</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body sidebar">
+    <ul class="nav flex-column">
+      <li><a href="Profile.html" class="nav-link text-light"><i class="fas fa-users me-2"></i>Profile</a></li>
+      <li><a href="Banks.html" class="nav-link text-light"><i class="fas fa-university me-2"></i>Banks</a></li>
+      <li><a href="cities.html" class="nav-link text-light"><i class="fas fa-city me-2"></i>Cities</a></li>
+      <li><a href="Embasses.html" class="nav-link text-light"><i class="fas fa-building me-2"></i>Embasses</a></li>
+      <li><a href="EntertainmentPlace.html" class="nav-link text-light"><i class="fas fa-film me-2"></i>Entertainment</a></li>
+      <li><a href="Hotel.html" class="nav-link text-light"><i class="fas fa-hotel me-2"></i>Hotel</a></li>
+      <li><a href="Restaurant.html" class="nav-link text-light"><i class="fas fa-utensils me-2"></i>Restaurant</a></li>
+      <li><a href="TourismPlace.html" class="nav-link text-light"><i class="fas fa-map-marked-alt me-2"></i>Tourism</a></li>
+      <li><a href="#" class="nav-link text-light" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+    </ul>
+  </div>
+</div>
+
+<main>
+  <div class="mb-3 mt-3">
+    <button class="btn btn-outline-primary" onclick="history.back()">
+      <i class="fas fa-arrow-left me-2"></i> Back
+    </button>
+  </div>
+  <div class="search-boxes mb-4">
+    <input type="text" class="form-control" id="searchName" placeholder="Search by Name" oninput="filterAllSections()">
+    <input type="number" class="form-control" id="searchRating" placeholder="Min Rating" oninput="filterAllSections()">
+  </div>
+
+  <div id="messageArea"></div>
+
+  <div><h4 class="section-title">🎡 Top Entertainment Places</h4><div class="card-container" id="entertainmentContainer"></div></div>
+  <div><h4 class="section-title">🍽️ Top Restaurants</h4><div class="card-container" id="restaurantsContainer"></div></div>
+  <div><h4 class="section-title">🏨 Top Hotels</h4><div class="card-container" id="hotelsContainer"></div></div>
+  <div><h4 class="section-title">🏦 Top Banks</h4><div class="card-container" id="banksContainer"></div></div>
+  <div><h4 class="section-title">🗺️ Tourism Places</h4><div class="card-container" id="TourismPlace"></div></div>
+  <div><h4 class="section-title">🎫 Embasses</h4><div class="card-container" id="Embassies"></div></div>
+</main>
+
+<footer>
+  &copy; 2025 Ametia Dashboard. All rights reserved.
+</footer>
+
+<script>
+const detailsUrlMap = {
+  hotelsContainer: `${baseURL}/Hotels/LoadHotelById/`,
+  restaurantsContainer: `${baseURL}/Resturant/LoadRestaurantById/`,
+  banksContainer: `${baseURL}/Bank/LoadBankById/`,
+  entertainmentContainer: `${baseURL}/EntertainmentPlace/LoadEntertainmentPlaceById/`,
+  TourismPlace: `${baseURL}/TourismPlace/LoadTourismt_PlaceById/`,
+  Embassies: `${baseURL}/Embassies/LoadEmbasseById/`
+};
+
+let allData = {
+  hotels: [],
+  restaurants: [],
+  banks: [],
+  entertainment: [],
+  TourismPlace: [],
+  Embassies: []
+};
+
+async function loadDestinations() {
+  const id = new URLSearchParams(window.location.search).get("id");
+  if (!id) {
+    document.getElementById("messageArea").innerHTML = `<div class="alert alert-danger">City ID is missing in URL</div>`;
+    return;
+  }
+
+  try {
+    const [TourismPlace, restaurants, hotels, banks, Embassies, entertainment] = await Promise.all([
+      fetch(`${baseURL}/Distnation/TopTourismt_Place/${id}`).then(res => res.json()),
+      fetch(`${baseURL}/Distnation/TopRestaurant/${id}`).then(res => res.json()),
+      fetch(`${baseURL}/Distnation/TopHotel/${id}`).then(res => res.json()),
+      fetch(`${baseURL}/Distnation/TopReatingBank/${id}`).then(res => res.json()),
+      fetch(`${baseURL}/Distnation/TopEmbassies/${id}`).then(res => res.json()),
+      fetch(`${baseURL}/Distnation/TopEntertainmentPlace/${id}`).then(res => res.json())
+    ]);
+
+    allData.hotels = hotels;
+    allData.restaurants = restaurants;
+    allData.banks = banks;
+    allData.entertainment = entertainment;
+    allData.TourismPlace = TourismPlace;
+    allData.Embassies = Embassies;
+
+    filterAllSections();
+  } catch (err) {
+    document.getElementById("messageArea").innerHTML = `<div class="alert alert-danger">Error loading data</div>`;
+  }
+}
+
+function filterAllSections() {
+  const name = document.getElementById("searchName").value.toLowerCase();
+  const rating = parseFloat(document.getElementById("searchRating").value) || 0;
+
+  renderCards("hotelsContainer", allData.hotels.filter(x => x.name?.toLowerCase().includes(name) && (x.rating ?? 0) >= rating));
+  renderCards("restaurantsContainer", allData.restaurants.filter(x => x.name?.toLowerCase().includes(name) && (x.rating ?? 0) >= rating));
+  renderCards("banksContainer", allData.banks.filter(x => x.name?.toLowerCase().includes(name) && (x.rating ?? 0) >= rating));
+  renderCards("entertainmentContainer", allData.entertainment.filter(x => x.name?.toLowerCase().includes(name) && (x.rating ?? 0) >= rating));
+  renderCards("TourismPlace", allData.TourismPlace.filter(x => x.name?.toLowerCase().includes(name) && (x.rating ?? 0) >= rating));
+  renderCards("Embassies", allData.Embassies.filter(x => x.name?.toLowerCase().includes(name) && (x.rating ?? 0) >= rating));
+}
+
+function renderCards(containerId, data) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  const baseUrl = detailsUrlMap[containerId];
+  data.forEach(item => {
+    const imgSrc = item.imageBytes ? `data:image/jpeg;base64,${item.imageBytes}` : "https://placehold.co/260x200?text=No+Image";
+    const detailsUrl = `Details.html?url=${encodeURIComponent(baseUrl + item.id)}`;
+    container.innerHTML += `
+      <div class="card">
+        <img src="${imgSrc}" alt="Image">
+        <div class="info">
+          <h5>${item.name ?? "Unknown"}</h5>
+          <p><strong>Rating:</strong> ${item.rating ?? "N/A"}</p>
+          <div class="d-grid">
+            <a href="${detailsUrl}" class="btn btn-primary btn-sm">Details</a>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+async function logout() {
+  sessionStorage.clear();
+  localStorage.clear();
+  const res = await fetch(`${baseURL}/User/Logout`, { method: "POST", credentials: "include" });
+  if (res.ok) window.location.href = "Login.html";
+  else alert("Logout failed.");
+}
+
+document.addEventListener("DOMContentLoaded", loadDestinations);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

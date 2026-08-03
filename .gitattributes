@@ -1,11 +1,24 @@
-# Exclude frontend folders from GitHub language statistics
-UserInterface/* linguist-vendored
-DashBordWeb/* linguist-vendored
+* text=auto eol=lf
 
-# Ensure C# and .NET files are counted as primary project languages
-*.cs linguist-detectable=true
-*.csproj linguist-detectable=true
-*.sln linguist-detectable=true
+*.cs text diff=csharp
+*.Designer.cs text diff=csharp linguist-generated=true
+*ModelSnapshot.cs text diff=csharp linguist-generated=true
+*.csproj text
+*.sln text eol=crlf
+*.json text
+*.html text
+*.css text
+*.js text
+*.md text
+*.yml text
+*.yaml text
+*.svg text
 
-# Optionally include JavaScript files in language stats
-*.js linguist-detectable=true
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.pdf binary

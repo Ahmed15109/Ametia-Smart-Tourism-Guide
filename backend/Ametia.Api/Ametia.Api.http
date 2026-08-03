@@ -1,0 +1,9 @@
+@AmetiaApi_HostAddress = https://localhost:7124
+
+GET {{AmetiaApi_HostAddress}}/swagger/v1/swagger.json
+Accept: application/json
+
+###
+
+GET {{AmetiaApi_HostAddress}}/api/City/GetCity
+Accept: application/json

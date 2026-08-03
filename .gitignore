@@ -1,0 +1,61 @@
+# IDE and editor state
+.vs/
+.vscode/
+*.suo
+*.user
+*.rsuser
+*.sln.docstates
+
+# .NET build and test output
+**/[Bb]in/
+**/[Oo]bj/
+**/[Aa]rtifacts/
+**/[Tt]est[Rr]esults/
+**/[Cc]overage/
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+*.binlog
+
+# Local and secret configuration
+.env
+.env.*
+!.env.example
+**/appsettings.Development.local.json
+**/appsettings.*.local.json
+**/secrets.json
+*.pfx
+*.p12
+*.key
+*.publishsettings
+*.pubxml
+*.pubxml.user
+frontend/**/config.local.js
+frontend/**/config.override.js
+
+# Local databases, generated media, and logs
+*.mdf
+*.ldf
+*.ndf
+*.db
+*.sqlite
+*.sqlite3
+**/[Ll]ogs/
+*.log
+**/[Uu]ploads/
+**/[Tt]emp/
+**/[Tt]mp/
+**/[Pp]ublish/
+
+# Frontend tooling and operating-system files
+node_modules/
+playwright-report/
+test-results/
+blob-report/
+browser-output/
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+~$*
